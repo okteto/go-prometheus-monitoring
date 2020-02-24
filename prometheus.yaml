@@ -25,7 +25,7 @@ data:
 
         static_configs:
         - targets:
-          - go-prometheus-monitoring:8080
+          - hello-world:8080
 
 ---
 

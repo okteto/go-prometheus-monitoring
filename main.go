@@ -18,12 +18,16 @@ var (
 
 func main() {
 	fmt.Println("Starting hello-world server...")
-	http.HandleFunc("/", helloServer)
-	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+	mux.Handle("/metrics", promhttp.Handler())
+	mux.HandleFunc("/", helloServer)
+
+	http.ListenAndServe(":8080", mux)
 }
 
 func helloServer(w http.ResponseWriter, r *http.Request) {
-	opsProcessed.Inc()
 	fmt.Fprint(w, "Hello world!")
+
+	fmt.Println("increasing hello_processed_total counter")
+	opsProcessed.Inc()
 }

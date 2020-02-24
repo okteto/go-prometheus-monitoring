@@ -1,4 +1,4 @@
-name: go-prometheus-monitoring
+name: hello-world
 image: okteto/golang:1
 command:
 - bash
